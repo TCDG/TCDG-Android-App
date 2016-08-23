@@ -2,9 +2,11 @@ package com.xelitexirish.tcdgandroidapp;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.xelitexirish.tcdgandroidapp.handler.NavigationHandler;
 import com.twitter.sdk.android.Twitter;
@@ -33,8 +35,18 @@ public class MainActivity extends AppCompatActivity {
 
         this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         this.mNavigationView = (NavigationView) findViewById(R.id.navigationView_main);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationHandler());
+        mNavigationView.setNavigationItemSelectedListener(new NavigationHandler(this));
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
