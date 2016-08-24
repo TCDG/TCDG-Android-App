@@ -20,7 +20,7 @@ import com.xelitexirish.tcdgandroidapp.utils.AppLists;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoFragment extends Fragment{
+public class RepoFragment extends Fragment {
 
     private static SwipeRefreshLayout mRefreshLayout;
 
@@ -44,14 +44,14 @@ public class RepoFragment extends Fragment{
             @Override
             public void onRefresh() {
                 mRefreshLayout.setRefreshing(true);
-
+                updateRecyclerView(getContext());
             }
         });
 
         setupRecyclerView(view);
     }
 
-    private void setupRecyclerView(View view){
+    private void setupRecyclerView(View view) {
         orgRepos = AppLists.getOrgRepos();
 
         adapter = new RepoRecyclerAdapter(getContext(), orgRepos);
@@ -68,13 +68,14 @@ public class RepoFragment extends Fragment{
         registerForContextMenu(mRecyclerView);
     }
 
-    public static void updateRecyclerView(List<GithubObjects.GithubRepo> newOrgRepos, Context context){
+    public void updateRecyclerView(Context context) {
         orgRepos.clear();
-        if(!newOrgRepos.isEmpty()){
-            orgRepos.addAll(newOrgRepos);
-            adapter.notifyDataSetChanged();
-        }
-        if(mRefreshLayout.isRefreshing()){
+
+        AppLists.updateLists(context);
+
+        orgRepos.addAll(AppLists.getOrgRepos());
+        adapter.notifyDataSetChanged();
+        if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         }
     }
