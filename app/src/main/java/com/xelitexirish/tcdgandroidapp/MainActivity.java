@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.xelitexirish.tcdgandroidapp.handler.NavigationHandler;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.xelitexirish.tcdgandroidapp.utils.AppLists;
 import com.xelitexirish.tcdgandroidapp.utils.SecretConstants;
 
 import io.fabric.sdk.android.Fabric;
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         this.mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         this.mNavigationView = (NavigationView) findViewById(R.id.navigationView_main);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationHandler(this));
+        mNavigationView.setNavigationItemSelectedListener(new NavigationHandler(mDrawerLayout, this));
+
+        AppLists.setupLists(this);
     }
 
     @Override
