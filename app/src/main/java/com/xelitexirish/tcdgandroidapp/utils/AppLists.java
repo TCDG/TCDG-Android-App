@@ -33,10 +33,14 @@ public class AppLists {
     }
 
     public static void updateLists(Context context){
+        orgRepos.clear();
         new UpdateGithubLists(context).execute();
     }
 
-    public static List<GithubObjects.GithubRepo> getOrgRepos(){
+    public static List<GithubObjects.GithubRepo> getOrgRepos(Context context){
+        if(orgRepos.isEmpty()){
+            new UpdateGithubLists(context).execute();
+        }
         return orgRepos;
     }
 
@@ -60,7 +64,6 @@ public class AppLists {
         }
 
         private void addOrgRepoInfo(){
-            orgRepos.clear();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray jsonArray = jsonParser.makeHttpRequest(context, Constants.GITHUB_ORG_REPOS, "GET", new HashMap<String, String>());

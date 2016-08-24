@@ -52,7 +52,7 @@ public class RepoFragment extends Fragment {
     }
 
     private void setupRecyclerView(View view) {
-        orgRepos = AppLists.getOrgRepos();
+        orgRepos = AppLists.getOrgRepos(getContext());
 
         adapter = new RepoRecyclerAdapter(getContext(), orgRepos);
         mRecyclerView = (ContextMenuRecyclerView) view.findViewById(R.id.recyclerViewRepos);
@@ -73,7 +73,7 @@ public class RepoFragment extends Fragment {
 
         AppLists.updateLists(context);
 
-        orgRepos.addAll(AppLists.getOrgRepos());
+        orgRepos.addAll(AppLists.getOrgRepos(context));
         adapter.notifyDataSetChanged();
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
