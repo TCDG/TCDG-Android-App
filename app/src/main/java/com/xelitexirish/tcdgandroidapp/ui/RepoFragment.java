@@ -13,11 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xelitexirish.tcdgandroidapp.R;
-import com.xelitexirish.tcdgandroidapp.RepoRecyclerAdapter;
+import com.xelitexirish.tcdgandroidapp.adapter.RepoRecyclerAdapter;
 import com.xelitexirish.tcdgandroidapp.handler.GithubObjects;
 import com.xelitexirish.tcdgandroidapp.utils.AppLists;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RepoFragment extends Fragment {

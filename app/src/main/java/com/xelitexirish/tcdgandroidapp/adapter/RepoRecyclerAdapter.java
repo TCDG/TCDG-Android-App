@@ -1,4 +1,4 @@
-package com.xelitexirish.tcdgandroidapp;
+package com.xelitexirish.tcdgandroidapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.xelitexirish.tcdgandroidapp.R;
 import com.xelitexirish.tcdgandroidapp.handler.GithubObjects;
 
 import java.util.List;

@@ -52,4 +52,28 @@ public class GithubObjects {
             return lanaguage;
         }
     }
+
+    public static class GithubMember {
+        private String username;
+        private String url;
+        private String profilePictureUrl;
+
+        public GithubMember(String username, String url, String profilePictureUrl){
+            this.username = username;
+            this.url = url;
+            this.profilePictureUrl = profilePictureUrl;
+        }
+
+        public String getUsername(){
+            return username;
+        }
+
+        public String getUrl(){
+            return url;
+        }
+
+        public String getProfilePictureUrl(){
+            return profilePictureUrl;
+        }
+    }
 }

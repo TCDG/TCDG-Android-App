@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import com.xelitexirish.tcdgandroidapp.R;
+import com.xelitexirish.tcdgandroidapp.ui.MembersFragment;
 import com.xelitexirish.tcdgandroidapp.ui.RepoFragment;
 import com.xelitexirish.tcdgandroidapp.ui.TwitterFragment;
 
@@ -42,9 +43,13 @@ public class NavigationHandler implements NavigationView.OnNavigationItemSelecte
     private static Object getScreenFromId(int id){
         if (id == R.id.nav_home) {
 
-        }else if (id == R.id.nav_repos){
+        }else if (id == R.id.nav_repos) {
             RepoFragment repoFragment = new RepoFragment();
             return repoFragment;
+
+        }else if (id == R.id.nav_members) {
+            MembersFragment membersFragment = new MembersFragment();
+            return membersFragment;
 
         }else if (id == R.id.nav_twitter){
             TwitterFragment twitterFragment = new TwitterFragment();
