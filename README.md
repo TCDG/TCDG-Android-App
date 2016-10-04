@@ -1,5 +1,5 @@
 <img src="icon.png" align="right" />
-# TCDG Phone App (Android) [![Awesome](https://travis-ci.org/TCDG/Scammer-Bingo---Android.svg?branch=material-rewrite)](https://travis-ci.org/TCDG/Scammer-Bingo---Android)
+# TCDG Phone App (Android) [![Awesome](https://travis-ci.org/TCDG/TCDG-Android-App.svg?branch=master)](https://travis-ci.org/TCDG/TCDG-Android-App)
 
 Get TCDG announcements for your favourite projects easily!
 
