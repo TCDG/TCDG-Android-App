@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_centerVertical="true"
+        android:paddingRight="10dp"
         android:layout_toRightOf="@+id/circleImageViewProfilePic"
         android:layout_toEndOf="@+id/circleImageViewProfilePic">
 
@@ -41,10 +42,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageViewProfilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:gravity="center_horizontal"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
