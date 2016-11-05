@@ -6,72 +6,67 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.xelitexirish.tcdgandroidapp.R;
+import com.xelitexirish.tcdgandroidapp.ui.HomeFragment;
 import com.xelitexirish.tcdgandroidapp.ui.MembersFragment;
 import com.xelitexirish.tcdgandroidapp.ui.RepoFragment;
 import com.xelitexirish.tcdgandroidapp.ui.TwitterFragment;
 
-public class NavigationHandler implements NavigationView.OnNavigationItemSelectedListener{
+import static android.R.attr.id;
 
-    private Context context;
-    private DrawerLayout drawerLayout;
+public class NavigationHandler {
 
-    public NavigationHandler(DrawerLayout drawerLayout, Context context){
-        this.context = context;
-        this.drawerLayout = drawerLayout;
-    }
+    private static final String TAG = NavigationHandler.class.getSimpleName();
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        Object obj = getScreenFromId(id);
+    public static final int idHome = 1;
+    public static final int idReposFragment = 2;
+    public static final int idMembersFragment = 3;
+    public static final int idTwitter = 19;
+    public static final int idSettings = 20;
 
-        if(obj instanceof Fragment){
-            replaceWithFragment(context, (Fragment) obj);
-        }else {
-            handleIntent(context, (Class) obj);
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
+    public static void handleClick(Context context, IDrawerItem drawerItem) {
+        long id = drawerItem.getIdentifier();
 
-    private static Object getScreenFromId(int id){
-        if (id == R.id.nav_home) {
+        if (id == idHome) {
+            HomeFragment homeFragment = new HomeFragment();
+            switchScreen(context, homeFragment);
 
-        }else if (id == R.id.nav_repos) {
-            RepoFragment repoFragment = new RepoFragment();
-            return repoFragment;
+        }else if (id == idReposFragment) {
+            RepoFragment fragmentBusRealTime = new RepoFragment();
+            switchScreen(context, fragmentBusRealTime);
 
-        }else if (id == R.id.nav_members) {
+        }else if (id == idMembersFragment) {
             MembersFragment membersFragment = new MembersFragment();
-            return membersFragment;
+            switchScreen(context, membersFragment);
 
-        }else if (id == R.id.nav_twitter){
+        }else if (id == idTwitter) {
             TwitterFragment twitterFragment = new TwitterFragment();
-            return twitterFragment;
+            switchScreen(context, twitterFragment);
+
+        } else if (id == idSettings) {
+
         }
-        return null;
     }
 
-    public void replaceWithFragment(Context context, Fragment fragment){
-        FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+    public static void switchScreen(Context context, Object screen) {
+        if (screen instanceof Fragment) {
+            try {
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, (Fragment) screen).addToBackStack(null).commit();
+            } catch (ClassCastException e) {
+                Log.e(TAG, "Can't get fragment manager");
+            }
 
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    public void handleIntent(Context context, Class intentClass){
-        try {
-            Intent intent = new Intent(context, intentClass);
-            context.startActivity(intent);
-        }catch (Exception e){
-            e.printStackTrace();
+        } else if (screen instanceof Intent) {
+            context.startActivity((Intent) screen);
         }
     }
 }

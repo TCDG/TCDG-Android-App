@@ -53,7 +53,7 @@ public class MembersFragment extends Fragment{
     }
 
     private void setupRecyclerView(View view) {
-        orgMembers = AppLists.getOrgMembers(getContext());
+        orgMembers = AppLists.orgMembers;
 
         adapter = new MembersRecyclerAdapter(getContext(), orgMembers);
         mRecyclerView = (ContextMenuRecyclerView) view.findViewById(R.id.recyclerViewMembers);
@@ -74,7 +74,7 @@ public class MembersFragment extends Fragment{
 
         AppLists.updateLists(context);
 
-        orgMembers.addAll(AppLists.getOrgMembers(context));
+        orgMembers.addAll(AppLists.orgMembers);
         adapter.notifyDataSetChanged();
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);

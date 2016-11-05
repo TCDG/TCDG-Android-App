@@ -3,22 +3,32 @@ package com.xelitexirish.tcdgandroidapp.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.xelitexirish.tcdgandroidapp.MainActivity;
 import com.xelitexirish.tcdgandroidapp.handler.GithubObjects;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AppLists {
 
+    public static ArrayList<GithubObjects.GithubRepo> orgRepos = new ArrayList<>();
+    public static ArrayList<GithubObjects.GithubMember> orgMembers = new ArrayList<>();
 
-    public static class UpdateGithubMembers extends AsyncTask<Void, Void, Void> {
+    public static void updateLists(Context context) {
+        new UpdateGithubRepos(context).execute();
+        new UpdateGithubMembers(context).execute();
+    }
+
+
+    public static class UpdateGithubRepos extends AsyncTask<Void, Void, Void> {
 
         private Context context;
 
-        public UpdateGithubMembers(Context context){this.context = context;}
+        public UpdateGithubRepos(Context context){this.context = context;}
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -52,11 +62,11 @@ public class AppLists {
         }
     }
 
-    public static class UpdateGithubRepos extends AsyncTask<Void, Void, Void> {
+    public static class UpdateGithubMembers extends AsyncTask<Void, Void, Void> {
 
         private Context context;
 
-        public UpdateGithubRepos(Context context) {
+        public UpdateGithubMembers(Context context) {
             this.context = context;
         }
 
