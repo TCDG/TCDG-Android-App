@@ -15,14 +15,53 @@ import java.util.HashMap;
 
 public class AppLists {
 
+    // TCDG Leaders
+    public static ArrayList<String> tcdgLeaders = new ArrayList<>();
+
     public static ArrayList<GithubObjects.GithubRepo> orgRepos = new ArrayList<>();
     public static ArrayList<GithubObjects.GithubMember> orgMembers = new ArrayList<>();
 
-    public static void updateLists(Context context) {
+    public static void initLists(Context context){
+        new UpdateTCDGLeaders(context).execute();
         new UpdateGithubRepos(context).execute();
         new UpdateGithubMembers(context).execute();
     }
 
+    public static void updateLists(Context context) {
+        orgRepos.clear();
+        orgMembers.clear();
+        new UpdateGithubRepos(context).execute();
+        new UpdateGithubMembers(context).execute();
+    }
+
+    public static class UpdateTCDGLeaders extends AsyncTask<Void, Void, Void> {
+
+        private Context context;
+
+        public UpdateTCDGLeaders(Context context){
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONParser jsonParser = new JSONParser();
+            JSONArray jsonArray = jsonParser.makeHttpRequest(context, Constants.TCDG_LEADERS, "GET", new HashMap<String, String>());
+
+            try {
+                if (jsonArray != null){
+                    for (int x = 0; x < jsonArray.length(); x++){
+                        JSONObject jsonItem = jsonArray.getJSONObject(x);
+
+                        String username = jsonItem.getString("login");
+                        tcdgLeaders.add(username);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     public static class UpdateGithubRepos extends AsyncTask<Void, Void, Void> {
 

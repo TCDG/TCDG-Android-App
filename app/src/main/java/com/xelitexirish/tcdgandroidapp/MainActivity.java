@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // Create the nav drawer
         buildNavDrawer(savedInstanceState);
 
-        AppLists.updateLists(this);
+        AppLists.initLists(this);
 
         // Set default fragment
         if (findViewById(R.id.fragment_container) != null) {
